@@ -18,6 +18,7 @@
 
 ##Instructions
 * Want to play the game?! Go to [http://cafesanu.github.io][8]
+* For a better experience, please play with a good old fashioned mouse!
 * To start a game, left-click any cell,
 * Left number on top means the number of mines left to discover (Exactly like the original version). 
   * Basically it is (total mines - number of flags). 
