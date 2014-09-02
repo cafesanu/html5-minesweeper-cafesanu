@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+
+.row{
+	width:100%;
+	max-width:900px;
+	min-width:900px;
+	margin:0 auto;	
+}
+.title{
+	text-align: center
+}
+.inforow{
+	width: 33%;
+}
+button {
+	width:69px; 
+	height:69px;
+	-webkit-border-radius: 13px;
+	-moz-border-radius: 13px;
+	border-radius: 13px;
+	border:5px solid #000000;
+	background-color:#FFE814;
+	background-image: url('/images/happyFace.png');
+    background-repeat: no-repeat;
+	cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+button:hover {
+	width:69px; 
+	height:69px;
+	-webkit-border-radius: 13px;
+	-moz-border-radius: 13px;
+	border-radius: 13px;
+	border:5px solid #000000;
+	background-color:#FFFF00;
+	background-image: url('/images/happyFace.png');
+    background-repeat: no-repeat;
+
+	cursor: pointer;
+}
+
+body { 
+	background: #f7f7f9; /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  #f7f7f9 0%, #ffffff 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#f7f7f9), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  #f7f7f9 0%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  #f7f7f9 0%,#ffffff 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  #f7f7f9 0%,#ffffff 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  #f7f7f9 0%,#ffffff 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f9', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}
+
+header {
+	padding: 30px 0px;	
+}
+
+h1 {
+	font-family: 'Lato', serif;
+	font-weight: 900;	
+}
+h2 {
+	font-family: 'Abel', serif;
+	font-weight: 900;
+	font-size: 250%;
+	line-height:-1em;
+}

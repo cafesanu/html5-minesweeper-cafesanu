@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<hmtl lang="en">
+<head>
+	<title>Minesweeper Canvas</title>
+	<meta charset="utf-8">
+	
+	<link rel="stylesheet" media="screen" type="text/css" href="css/styles.css" />
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Abel|Lato:400,700,900' rel='stylesheet' type='text/css'>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	
+	<script type="text/javascript" src="js/minesweeper.js"></script>
+</head>
+
+<body>
+		<div class="row title">
+			<h1>HTML5 Minesweeper CAFESANU</h1>
+		</div>
+		<div class="row">
+			<div class="inforow", style="float: left; ">
+				<h2>
+					<div id="areaMinesLeft">LEFT</div>
+				<h2>
+			</div>
+			<div class="inforow", style="float: left;text-align:center; ">
+				<button id="happyBtn"></button>
+			</div>
+			<div class="inforow", style="float: right;text-align: right;">
+				<h2>
+					<div id="areaTime">0</div>
+				<h2>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 100px;">
+			<canvas id="playarea" width="900" height="480" oncontextmenu="return false;"></canvas>
+		</div>
+</body>
+</html>
