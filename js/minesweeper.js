@@ -430,7 +430,7 @@ $(function MinesweeperCAFESANU(){
                     var neighborRow = row + shiftRow;
                     var neighborCol = col + shiftCol;
                     if( game.withinBoundaries(neighborRow , neighborCol) &&
-                        !(neighborRow == 0 && neighborCol == 0) ){
+                        !(shiftRow == 0 && shiftCol == 0) ){
                         if(instance[neighborRow][neighborCol].content === MINE_BOMB){
                             numMinesAround++;
                         }
