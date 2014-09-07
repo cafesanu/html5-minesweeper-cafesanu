@@ -29,12 +29,14 @@ $(function MinesweeperCAFESANU(){
     var minesLeft        = numMines;
     var minesLeftArea    = '';
     var mineSource       = 'images/mine.jpg';
+    var uncoveredCells   = 0
     var numMines         = 99;
     var rows             = '';
     var secondsPassed    = 0;
     var squareBorder     = '#EEEEEE';
     var timeArea         ='';
     var timeInterval     = 0;
+    var coveredCells     = 0;
     var width            = 0;
 
     //Constants
@@ -146,6 +148,8 @@ $(function MinesweeperCAFESANU(){
          * Restart global variables that might have been changed previously
          */
         restartInstanceElements: function(){ 
+
+            coveredCells = rows * cols;
             secondsPassed = 0;
             timeArea.text(secondsPassed);
             secondsPassed++;
@@ -183,11 +187,32 @@ $(function MinesweeperCAFESANU(){
                         game.createInstance(row, col);
                     }
                     game.uncover(row, col);
+                    game.checkIfWon();
                 }
                 else if(whichClick == RIGHT_CLICK && !firstClick){
                     game.handleRightClick(row,col);
                 }
             }
+        },
+
+        /*
+         * Chacke if user has won by chanking that the amount of cover cells is equal 
+         * to the number of mines(Meaning there is nothing else but mines)
+         */
+        checkIfWon: function(){
+            if(!gameover && coveredCells == numMines){
+                game.win()
+            }
+        },
+
+        /*
+         * User won!
+         */
+        win: function(){
+            clearInterval(timeInterval);
+            gameover = true;
+            document.getElementById('happyBtn').style.backgroundImage="url('images/winner.png')";
+            game.drawSolution();
         },
 
         /*
@@ -234,6 +259,7 @@ $(function MinesweeperCAFESANU(){
                 game.lose(row, col);
                 return;
             }
+            coveredCells--;
             instance[row][col].status = UNCOVERED;
             game.drawUncoveredSquare(row,col);
             var content = instance[row][col].content;
@@ -374,15 +400,23 @@ $(function MinesweeperCAFESANU(){
          * and the correct flags put by the user
          */
         drawSolution: function(killerRow, killerCol){
+            killerRow = typeof killerRow !== 'undefined' ?  killerRow : -1;
+            killerCol = typeof killerCol !== 'undefined' ?  killerCol : -1;
+            var userWon = false;
+            if(!game.withinBoundaries(killerRow, killerCol))
+                userWon = true;
             for(var row = 0; row < rows; row++){
                 for(var col = 0; col < cols; col++){
                     var status = instance[row][col].status;
                     if(status == COVERED || status == FLAGGED){
-                        game.drawUncoveredSquare(row, col);
+                        game.drawUncoveredSquare(row, col, userWon);
                     }
                 } 
             }
-            boardContext.drawImage(killerMine, killerCol * celSize, killerRow * celSize, celSize, celSize);
+            if(game.withinBoundaries(killerRow, killerCol)){
+                boardContext.drawImage(killerMine, killerCol * celSize, killerRow * celSize, celSize, celSize);
+            }
+            
         },
 
         /*
@@ -430,7 +464,7 @@ $(function MinesweeperCAFESANU(){
                     var neighborRow = row + shiftRow;
                     var neighborCol = col + shiftCol;
                     if( game.withinBoundaries(neighborRow , neighborCol) &&
-                        !(neighborRow == 0 && neighborCol == 0) ){
+                        !(shiftRow == 0 && shiftCol == 0) ){
                         if(instance[neighborRow][neighborCol].content === MINE_BOMB){
                             numMinesAround++;
                         }
@@ -460,7 +494,7 @@ $(function MinesweeperCAFESANU(){
          * position. Then display flag
          * If cell is a bomd, draw a bomb
          */
-        drawUncoveredSquare: function(row, col){
+        drawUncoveredSquare: function(row, col, userWon){
             var squareColor = 'white';
             game.drawColoredSquare(row, col, squareColor);
             var cell = instance[row][col];
@@ -502,8 +536,13 @@ $(function MinesweeperCAFESANU(){
             else if(cell.status == FLAGGED && cell.content != MINE_BOMB){
                 boardContext.drawImage(mineRed, col * celSize, row * celSize, celSize, celSize);
             }
-            else if(cell.content === MINE_BOMB){     
-                boardContext.drawImage(mine, col * celSize, row * celSize, celSize, celSize);
+            else if(cell.content === MINE_BOMB){
+                if(userWon) {
+                    boardContext.drawImage(flag, col * celSize, row * celSize, celSize, celSize);
+                }
+                else{
+                    boardContext.drawImage(mine, col * celSize, row * celSize, celSize, celSize);
+                }
             }
             else{
                 boardContext.fillStyle = squareColor;   
