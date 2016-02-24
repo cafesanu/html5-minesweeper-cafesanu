@@ -1,5 +1,5 @@
     
-- Project Website: [http://cafesanu.github.io/][1]
+- Project Website: [http://cafesanu.github.io/html5-minesweeper-cafesanu/][1]
 
 ## Technologies used
 - [CSS][6]
